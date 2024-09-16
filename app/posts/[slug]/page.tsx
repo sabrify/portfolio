@@ -2,10 +2,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { formatDate } from '@/lib/utils'
-import { getPostBySlug, getPosts } from '@/lib/posts'
+import MDXContent from '@/components/mdx-content'
+import { getPosts, getPostBySlug } from '@/lib/posts'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { notFound } from 'next/navigation'
-import MDXContent from '@/components/mdx-content'
+
 
 export async function generateStaticParams() {
   const posts = await getPosts()
@@ -37,7 +38,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         </Link>
 
         {image && (
-          <div className='relative mb-6 h-64 w-full overflow-hidden rounded-lg'>
+          <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
             <Image
               src={image}
               alt={title || ''}
@@ -58,6 +59,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <MDXContent source={content} />
         </main>
 
+        <footer className='mt-16'>
+         
+        </footer>
       </div>
     </section>
   )

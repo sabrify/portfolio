@@ -2,16 +2,19 @@ import { JSX } from 'react'
 import { highlight } from 'sugar-high'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 
-import Counter from './counter'
+// Define the Code component with proper typing
+function Code({
+  children,
+  ...props
+}: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & { children: string }) {
+  const codeHTML = highlight(children)
 
-function Code({ children, ...props }: any) {
-  let codeHTML = highlight(children)
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
 }
 
-const components = {
-  code: Code,
-  Counter
+// Custom components for MDX rendering
+const components: Record<string, any> = {
+  code: Code
 }
 
 export default function MDXContent(
