@@ -1,0 +1,55 @@
+---
+title: "How to Make the Header Transparent in Dawn Theme"
+summary: "A step-by-step guide on making the header transparent in Shopify's Dawn theme."
+image: "/images/posts/header-transparent-dawn.png"
+author: "Hamid Sabri"
+publishedAt: "2024-09-14"
+---
+
+# How to Make the Header Transparent in Dawn Theme
+
+Here's how you can make the header transparent on the Dawn theme.
+
+> 📘 **Before editing the code, it's important to make a duplicate of your theme. It's recommended to create custom files and then reference them in the `theme.liquid` file.**
+
+First, inspect the HTML element to find the class responsible for styling the header. In our case, it's the `"header-wrapper"` class.
+
+Set the header background-color to transparent and position it over the main section.
+## Code Snippet
+
+```css
+/* Make the header transparent and position it over the main section */
+.header-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10; /* Ensure the header is on top of the image */
+  background-color: transparent; /* Keep header transparent */
+}
+/* Style the header content */
+.header {
+  position: relative;
+  z-index: 10; /* Ensure content is above the banner image */
+}
+/* Main content section */
+#MainContent {
+  position: relative;
+  z-index: 1; /* Ensure main content is below the header */
+}
+/* Style the banner image */
+.banner_media {
+  position: relative;
+  height: 100vh; /* Make the banner image fill the viewport */
+  width: 100%;
+  overflow: hidden;
+}
+
+```
+The final step is to reference the custom CSS file in the theme.liquid file, just before the closing 'head' tag.
+
+```liquid
+{{ 'custom-styles.css' | asset_url | stylesheet_tag }}
+
+
+```
