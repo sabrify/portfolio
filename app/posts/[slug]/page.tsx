@@ -28,7 +28,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 
   return (
     <section className='pb-24 pt-32'>
-      <div className='container max-w-3xl'>
+      <div className='container max-w-5xl'>
         <Link
           href='/posts'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
@@ -56,7 +56,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </p>
         </header>
 
-        <main className='prose mt-16 dark:prose-invert'>
+        <main className='prose max-w-5xl mt-16 dark:prose-invert'>
           <MDXContent source={content} />
         </main>
 

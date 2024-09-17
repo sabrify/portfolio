@@ -78,7 +78,7 @@ export default function ContactForm() {
       </svg>
 
       {/* Form */}
-      <div className='relative'>
+      <div className='relative mt-16'>
         <form
           onSubmit={handleSubmit(processForm)}
           className='mt-16 lg:flex-auto'
@@ -87,6 +87,8 @@ export default function ContactForm() {
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
             {/* Name */}
             <div>
+            <label >Name</label>
+            <div className='mt-2.5'>
               <Input
                 id='name'
                 type='text'
@@ -101,9 +103,13 @@ export default function ContactForm() {
                 </p>
               )}
             </div>
+            </div>
+            
 
             {/* Email */}
             <div>
+              <label>Email</label>
+              <div className='mt-2.5'>
               <Input
                 type='email'
                 id='email'
@@ -117,15 +123,21 @@ export default function ContactForm() {
                   {errors.email.message}
                 </p>
               )}
+              </div>
+             
             </div>
 
             {/* Message */}
+            
             <div className='sm:col-span-2'>
+            <label className='leading-6'>Messages</label>
+              <div className='mt-2.5'>
               <Textarea
                 rows={4}
                 placeholder='Message'
                 {...register('message')}
               />
+              </div>
 
               {errors.message?.message && (
                 <p className='ml-1 mt-2 text-sm text-rose-400'>
@@ -138,9 +150,9 @@ export default function ContactForm() {
             <Button
               type='submit'
               disabled={isSubmitting}
-              className='w-full disabled:opacity-50'
+              className='w-full disabled:opacity-50 font-semibold'
             >
-              {isSubmitting ? 'Submitting...' : 'Contact Us'}
+              {isSubmitting ? 'Submitting...' : "Let's chat! "}
             </Button>
           </div>
           <p className='mt-4 text-xs text-muted-foreground'>
