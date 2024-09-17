@@ -103,3 +103,10 @@
     @apply font-medium;
   }
 }
+/* Add this to your global CSS file */
+blockquote {
+  background-color: rgb(242, 194, 164);
+  padding: 10px;
+  border-radius: 8px;
+}
+ 

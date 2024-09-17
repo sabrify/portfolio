@@ -1,0 +1,145 @@
+---
+title: "How to Add a Second Logo in Dawn Theme Header with Smooth Transitions"
+summary: "A guide to adding smooth transitions between logos and header background color in Shopify's Dawn theme."
+image: "/images/posts/transition-gif.gif"
+author: "Hamid Sabri"
+publishedAt: "2024-09-15"
+---
+
+
+# How to Add a Second Logo in Dawn Theme Header with Smooth Transitions
+
+Adding smooth transitions to the header's background color and logo changes can significantly enhance the visual appeal of your Shopify Dawn theme. In this post, we will go step-by-step through the process of implementing these transitions using JavaScript and CSS.
+
+> 📘 **Before editing the code, make a duplicate of your theme. It’s always recommended to create custom files and reference them in the `theme.liquid` file.**
+
+---
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Event Listener for Scroll](#event-listener-for-scroll)
+- [Background Color Change](#background-color-change)
+- [Logo Transition Logic](#logo-transition-logic)
+- [Code Snippet](#code-snippet)
+- [CSS for Smooth Transitions](#css-for-smooth-transitions)
+- [Why This Solution is Beneficial](#why-this-solution-is-beneficial)
+- [Related Posts](#related-posts)
+- [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+This guide demonstrates how to dynamically change the header's background color and switch between two logos as the user scrolls down the page. When the page is scrolled more than 50 pixels, the background color of the header changes, and the primary logo fades out to be replaced by a secondary logo. This is done using JavaScript for event handling and CSS for smooth transitions.
+
+## Event Listener for Scroll
+
+We use the `scroll` event to monitor when the user scrolls the page:
+
+```javascript
+window.addEventListener('scroll', function() {
+  const headerWrapper = document.querySelector('.header-wrapper');
+  const logoPrimary = document.querySelector('.header__heading-logo');
+  const logoSecondary = document.querySelector('.header__heading-logo-second');
+
+  // Check if the page is scrolled more than 50px
+  if (window.scrollY > 50) {
+    // Change header background color
+    headerWrapper.classList.add('color-on-scroll');
+    // Fade out the first logo and fade in the second one
+    logoPrimary.style.opacity = '0';  // Fade out primary logo
+    setTimeout(function() {
+      logoPrimary.style.display = 'none';  // Set display none after fading out
+      logoSecondary.style.display = 'block';  // Display the secondary logo
+      setTimeout(function() {
+        logoSecondary.style.opacity = '1';  // Fade in secondary logo after display change
+      }, 10);  // Small timeout to ensure opacity transition kicks in
+    }, 0);  // Delay to match CSS transition timing
+  } else {
+    // Change header background color back
+    headerWrapper.classList.remove('color-on-scroll');
+
+    // Fade out the second logo and fade in the first one
+    logoSecondary.style.opacity = '0';  // Fade out secondary logo
+    setTimeout(function() {
+      logoSecondary.style.display = 'none';  // Set display none after fading out
+      logoPrimary.style.display = 'block';  // Display the primary logo
+      setTimeout(function() {
+        logoPrimary.style.opacity = '1';  // Fade in primary logo after display change
+      }, 10);  // Small timeout to ensure opacity transition kicks in
+    },0);  // Delay to match CSS transition timing
+  }
+});
+```
+
+### Key Points:
+- The `scroll` event triggers at more than 50px of vertical scroll.
+- The logos are transitioned using the `opacity` and `display` properties for smooth fading.
+
+## Background Color Change
+
+We use a class to change the background color when the page is scrolled beyond 50px. The transition is smoothened by using CSS:
+
+```css
+/* Transition for smooth background color change on scroll */
+.header-wrapper {
+  background-color: transparent; /* Default background color */
+  transition: background-color 0.15s ease-in-out; /* Smooth background color transition */
+}
+/* When scrolled, change background color */
+.header-wrapper.color-on-scroll {
+  background-color: rgb(var(--color-background)) !important;
+}
+```
+
+### Key Points:
+- The default background color is transparent.
+- When scrolled, a new background color is applied, making the header more visually engaging.
+
+## Logo Transition Logic
+
+When scrolling down past 50px:
+- **Fade Out Primary Logo**: The primary logo fades out by reducing its opacity.
+- **Show Secondary Logo**: The secondary logo is displayed with an opacity transition to fade in smoothly.
+
+When scrolling up (less than 50px):
+- **Fade Out Secondary Logo**: The secondary logo fades out and the primary logo fades back in.
+
+
+## CSS for Smooth Transitions
+
+We use **CSS transitions** to create a smooth fade effect for both the background color and the logos:
+
+```css
+/* Common transition for both logos (primary and secondary) to fade in and out */
+.header__heading-logo, .header__heading-logo-second {
+  transition: opacity 0.15s ease-in-out; /* Smooth transition for fading in/out */
+  opacity: 1; /* Default opacity (fully visible) */
+}
+
+/* Secondary logo is hidden by default */
+.header__heading-logo-second {
+  display: none; /* Hidden by default */
+}
+```
+
+## Why This Solution is Beneficial
+
+This approach enhances the **user experience** in several ways:
+1. **Improved Branding**: By switching between logos, you can emphasize different branding aspects depending on the scroll position (e.g., showing a simpler logo for a sticky header).
+2. **Visual Appeal**: Smooth transitions make your site feel more polished and professional.
+3. **Responsive Design**: The solution is optimized for quick transitions, ensuring users on different devices experience seamless logo switches.
+
+## Related Posts
+
+If you found this helpful, you might also enjoy these posts:
+- [How to Make the Header Transparent in Dawn Theme](/posts/transparent-header)
+- [Enhancing Shopify Dawn Theme with Custom Animations](#)
+- [Creating a Sticky Header with Logo Transition in Shopify](#)
+
+## Conclusion
+
+By adding smooth transitions between logos and background color changes, you can give your Shopify store a polished, professional feel. This approach is easy to implement and significantly enhances user interaction.
+
+Now that you’ve learned how to add this feature, try it out on your store and let me know how it works for you!
