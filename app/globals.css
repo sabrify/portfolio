@@ -111,3 +111,8 @@
       padding: 10px;
   }
   }
+  [data-vaul-drawer]::after {
+    content: none !important;
+    background: none !important;
+    background-color: transparent !important;
+  }
