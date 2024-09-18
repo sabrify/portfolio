@@ -5,22 +5,15 @@ import { Drawer as DrawerPrimitive } from "vaul"
 
 import { cn } from "@/lib/utils"
 
-const DrawerContext = React.createContext<{direction?: "top" | "bottom" | "left" | "right"}>({});
-
-
-
 const Drawer = ({
   shouldScaleBackground = true,
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerContext.Provider value={{direction: props.direction}}>
   <DrawerPrimitive.Root
     shouldScaleBackground={shouldScaleBackground}
     {...props}
   />
-  </DrawerContext.Provider>
-
-);  
+)
 Drawer.displayName = "Drawer"
 
 const DrawerTrigger = DrawerPrimitive.Trigger
@@ -44,17 +37,13 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => {
-  const {direction} = React.useContext(DrawerContext)
-  return(
+>(({ className, children, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed  z-50 flex h-auto flex-col rounded-t-[10px] border bg-background",
-        (!direction || direction === "bottom") && "inset-x-0 bottom-0  mt-24",
-        direction === "left" && "top-0 left-0 w-screen max-w-80 h-full",
+        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
         className
       )}
       {...props}
@@ -63,7 +52,7 @@ const DrawerContent = React.forwardRef<
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
-)});
+))
 DrawerContent.displayName = "DrawerContent"
 
 const DrawerHeader = ({

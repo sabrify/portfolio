@@ -8,7 +8,7 @@ import { MenuIcon } from 'lucide-react'
 export default function MainMenu() {
   const isDesktop = useMediaQuery('(min-width: 768px)')
   return isDesktop ? (
-    <div className='Desktop'>
+    <div className='Desktop-nav'>
       <nav className='container flex max-w-5xl items-center justify-between'>
         <div>
           <Link href='/' className='font-serif text-5xl font-bold'>
@@ -34,30 +34,39 @@ export default function MainMenu() {
       </nav>
     </div>
   ) : (
-    <div>
-      <Drawer direction='left'>
-        <DrawerTrigger>
-          <nav className='container flex max-w-5xl items-center justify-between'>
-            <MenuIcon />
-            <div>
-              <ThemeToggle />
-            </div>
-          </nav>
+    <div className='mobile-nav'>
+  <Drawer direction='left'>
+    
+    <nav className='container flex max-w-5xl items-center justify-between'>
+    <DrawerTrigger>
+        <div><MenuIcon /> {/* This should be on the far left */}</div>
         </DrawerTrigger>
-        <DrawerContent>
-          <ul className='flex flex-col items-start gap-6 px-20 py-8 text-base font-medium text-muted-foreground sm:gap-10'>
-            <li className='transition-colors hover:text-foreground'>
-              <Link href='/posts'>Posts</Link>
-            </li>
-            <li className='transition-colors hover:text-foreground'>
-              <Link href='/projects'>Projects</Link>
-            </li>
-            <li className='transition-colors hover:text-foreground'>
-              <Link href='/contact'>Contact</Link>
-            </li>
-          </ul>
-        </DrawerContent>
-      </Drawer>
-    </div>
+        <div>
+          <Link href='/' className='font-serif text-2xl font-bold'>
+            HS
+          </Link>
+        </div>
+        <div>
+          <ThemeToggle /> {/* This should be on the far right */}
+        </div>
+      </nav>
+
+    
+    {/* Drawer content for mobile links */}
+    <DrawerContent>
+      <ul className='flex flex-col items-start gap-6 px-20 py-8 text-base font-medium text-muted-foreground sm:gap-10'>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/posts'>Posts</Link>
+        </li>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/projects'>Projects</Link>
+        </li>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/contact'>Contact</Link>
+        </li>
+      </ul>
+    </DrawerContent>
+  </Drawer>
+</div>
   )
 }
