@@ -5,6 +5,8 @@ image: "/images/posts/responsive-navbar-step1.png"
 author: "Hamid Sabri"
 publishedAt: "2024-09-18"
 ---
+
+
 ---
 
 ## Table of Contents
@@ -18,7 +20,7 @@ publishedAt: "2024-09-18"
 
 ---
 
-## Introduction
+<HeadingWithId id="introduction" as="h2">Introduction</HeadingWithId>
 
 With the increasing complexity of web applications, building a responsive, user-friendly navigation system is essential. In this tutorial, we'll dive into how to create a **responsive navbar** in **Next.js**, leveraging the power of the **Shadcn UI** library to build a custom drawer component for mobile devices.
 
@@ -26,7 +28,7 @@ While Shadcn UI is gaining popularity for its design flexibility, documentation 
 
 By the end of this guide, you'll have a scalable and elegant solution for handling navigation across both desktop and mobile views, using cutting-edge tools like **Shadcn UI** and **Next.js**.
 
-### Step 1: Setting Up the Header
+<HeadingWithId id="step-1-setting-up-the-header" as="h3">Step 1: Setting Up the Header</HeadingWithId>
 
 The first step in building a navigation bar is setting up a fixed header. This header will contain the `MainMenu` component that we’ll be working on throughout the post.
 
@@ -54,8 +56,7 @@ export default function Header() {
 A fixed header improves user experience by keeping navigation easily accessible as users scroll down the page. The blurred background adds a modern aesthetic, and the \`z-index\` ensures it doesn’t get hidden by other content.
 
 
-
-### Step 2: Creating the Main Menu Component
+<HeadingWithId id="step-2-creating-the-main-menu-component" as="h3">Step 2: Creating the Main Menu Component</HeadingWithId>
 
 Next, let’s create the `MainMenu` component that will dynamically switch between desktop and mobile views. The desktop menu will display navigation links and a theme toggle, while the mobile menu will include a hamburger icon that triggers the custom drawer.
 
@@ -148,8 +149,7 @@ export default function MainMenu() {
 This structure ensures that the same \`MainMenu\` component can adapt to both desktop and mobile views, reducing code duplication. The drawer implementation allows for smooth and user-friendly navigation on mobile devices.
 
 
-
-### Step 3: Building a Custom Drawer
+<HeadingWithId id="step-3-building-a-custom-drawer" as="h3">Step 3: Building a Custom Drawer</HeadingWithId>
 
 To handle the mobile menu, we need a custom drawer component. This drawer will slide from the left, housing the navigation links when the hamburger icon is clicked.
 
@@ -231,8 +231,8 @@ export { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, Drawer
 ##### Why this step is beneficial:
 By using context, the drawer's direction can be easily modified, making it a reusable component for different layouts. This approach improves scalability and maintainability while ensuring flexibility for various design scenarios. 
 
+<HeadingWithId id="step-4-implementing-mobile-and-desktop-views" as="h3">Step 4: Implementing Mobile and Desktop Views</HeadingWithId>
 
-### Step 4: Implementing Mobile and Desktop Views
 
 By using the `MainMenu` component, we automatically render the appropriate navigation based on screen size. The drawer provides a clean and user-friendly way to display the mobile menu.
 
@@ -308,7 +308,9 @@ return isDesktop ? (
 #### Key Points:
 - **Desktop View**: Displays navigation links in a flexbox layout, with a logo on the left and a theme toggle on the right.
 - **Mobile View**: Uses the drawer for the menu, triggered by the `MenuIcon`, with a logo and theme toggle still accessible.
-## Related Posts
+
+<HeadingWithId id="related-posts" as="h2">Related Posts</HeadingWithId>
+
 
 If you found this guide helpful, you might also enjoy:
 
@@ -316,7 +318,7 @@ If you found this guide helpful, you might also enjoy:
 
 ---
 
-## Conclusion
+<HeadingWithId id="conclusion" as="h2">Conclusion</HeadingWithId>
 
 By building this responsive navbar with a custom drawer, your Next.js project will provide a polished and modern navigation experience across both desktop and mobile devices. The use of Tailwind CSS and a custom drawer ensures flexibility, scalability, and ease of maintenance.
 

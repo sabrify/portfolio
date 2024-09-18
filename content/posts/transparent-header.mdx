@@ -12,16 +12,21 @@ Here's how you can make the header transparent on the Dawn theme to enhance its 
 
 ---
 
-## Table of Contents
+<HeadingWithId id="table-of-contents" as="h2">Table of Contents</HeadingWithId>
+
 - [Introduction](#introduction)
-- [Code Snippet](#code-snippet)
+- [Step 1: Making the Header Transparent](#step-1-making-the-header-transparent)
+- [Step 2: Styling the Header Content](#step-2-styling-the-header-content)
+- [Step 3: Ensuring Main Content Stays Below](#step-3-ensuring-main-content-stays-below)
+- [Step 4: Styling the Banner Image](#step-4-styling-the-banner-image)
 - [Why This Solution is Beneficial](#why-this-solution-is-beneficial)
 - [Final Steps](#final-steps)
 - [Related Posts](#related-posts)
+- [Conclusion](#conclusion)
 
 ---
 
-## Introduction
+<HeadingWithId id="introduction" as="h2">Introduction</HeadingWithId>
 
 In this guide, we will inspect the HTML element responsible for styling the header in the **Shopify Dawn theme** and modify it to make the header background transparent. This is especially useful for giving your site a clean and modern look, allowing your banner or background content to flow seamlessly with the navigation header.
 
@@ -29,11 +34,8 @@ We’ll apply some CSS changes and ensure the header is positioned correctly ove
 
 ---
 
-## Code Snippet
+<HeadingWithId id="step-1-making-the-header-transparent" as="h2">Step 1: Making the Header Transparent</HeadingWithId>
 
-We begin by identifying the `"header-wrapper"` class, which is responsible for styling the header in the Dawn theme. We will update the CSS to make the header transparent and ensure it’s positioned correctly over the main content.
-
-### 1. **Making the Header Transparent**:
 We need to ensure the header is absolutely positioned at the top and that its background is transparent. This will let the background image or banner content show through.
 
 ```css
@@ -48,7 +50,8 @@ We need to ensure the header is absolutely positioned at the top and that its ba
 }
 ```
 
-### 2. **Styling the Header Content**:
+<HeadingWithId id="step-2-styling-the-header-content" as="h2">Step 2: Styling the Header Content</HeadingWithId>
+
 We want to make sure that the content inside the header (such as the logo and navigation) stays visible and positioned correctly over the main section.
 
 ```css
@@ -59,7 +62,8 @@ We want to make sure that the content inside the header (such as the logo and na
 }
 ```
 
-### 3. **Ensuring the Main Content Stays Below**:
+<HeadingWithId id="step-3-ensuring-main-content-stays-below" as="h2">Step 3: Ensuring the Main Content Stays Below</HeadingWithId>
+
 To prevent the main content from overlapping with the header, we set the `z-index` of the main content to be lower than that of the header.
 
 ```css
@@ -70,7 +74,8 @@ To prevent the main content from overlapping with the header, we set the `z-inde
 }
 ```
 
-### 4. **Styling the Banner Image**:
+<HeadingWithId id="step-4-styling-the-banner-image" as="h2">Step 4: Styling the Banner Image</HeadingWithId>
+
 Lastly, we ensure that the banner image fills the entire viewport, creating a seamless transition between the header and the content below.
 
 ```css
@@ -85,7 +90,7 @@ Lastly, we ensure that the banner image fills the entire viewport, creating a se
 
 ---
 
-## Why This Solution is Beneficial
+<HeadingWithId id="why-this-solution-is-beneficial" as="h2">Why This Solution is Beneficial</HeadingWithId>
 
 1. **Modern and Clean Aesthetic**: A transparent header can make your store look sleek and professional, allowing the banner or background image to flow seamlessly with the header.
    
@@ -95,7 +100,7 @@ Lastly, we ensure that the banner image fills the entire viewport, creating a se
 
 ---
 
-## Final Steps
+<HeadingWithId id="final-steps" as="h2">Final Steps</HeadingWithId>
 
 After making these changes, the final step is to reference your custom CSS file in the `theme.liquid` file of your Shopify theme. This ensures that the CSS is applied globally across your theme.
 
@@ -109,7 +114,7 @@ Make sure to include this reference just before the closing `</head>` tag in the
 
 ---
 
-## Related Posts
+<HeadingWithId id="related-posts" as="h2">Related Posts</HeadingWithId>
 
 If you found this guide helpful, you might also enjoy:
 
@@ -117,7 +122,7 @@ If you found this guide helpful, you might also enjoy:
 
 ---
 
-## Conclusion
+<HeadingWithId id="conclusion" as="h2">Conclusion</HeadingWithId>
 
 With a transparent header, your Dawn theme will have a modern, sleek look that helps make your content stand out. Implementing these changes is straightforward, and the result will greatly improve the visual appeal of your Shopify store. Don’t forget to explore other customization options in our related posts to further enhance your store!
 

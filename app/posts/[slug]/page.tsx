@@ -7,7 +7,6 @@ import { getPosts, getPostBySlug } from '@/lib/posts'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { notFound } from 'next/navigation'
 
-
 export async function generateStaticParams() {
   const posts = await getPosts()
   const slugs = posts.map(post => ({ slug: post.slug }))
@@ -38,16 +37,18 @@ export default async function Post({ params }: { params: { slug: string } }) {
         </Link>
 
         {image && (
-  <div className='relative mb-6 w-full overflow-hidden rounded-lg ' style={{ minHeight: '384px' }}>
-    <Image
-      src={image}
-      alt={title || ''}
-      className='object-contain'
-      layout='fill'
-    />
-  </div>
-)}
-
+          <div
+            className='relative mb-6 w-full overflow-hidden rounded-lg'
+            style={{ minHeight: '384px' }}
+          >
+            <Image
+              src={image}
+              alt={title || ''}
+              className='object-contain'
+              layout='fill'
+            />
+          </div>
+        )}
 
         <header>
           <h1 className='title'>{title}</h1>
@@ -56,13 +57,11 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </p>
         </header>
 
-        <main className='prose max-w-5xl mt-16 dark:prose-invert'>
+        <main className='prose mt-16 max-w-5xl dark:prose-invert'>
           <MDXContent source={content} />
         </main>
 
-        <footer className='mt-16'>
-         
-        </footer>
+        <footer className='mt-16'></footer>
       </div>
     </section>
   )
