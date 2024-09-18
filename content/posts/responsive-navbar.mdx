@@ -1,0 +1,325 @@
+---
+title: "Building a Responsive Navbar with Shadcn UI and Custom Drawer in Next.js"
+summary: "Step-by-step guide on setting up the header for a responsive navbar in Next.js."
+image: "/images/posts/responsive-navbar-step1.png"
+author: "Hamid Sabri"
+publishedAt: "2024-09-18"
+---
+---
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Step 1: Setting Up the Header](#step-1-setting-up-the-header)
+- [Step 2: Creating the Main Menu Component](#step-2-creating-the-main-menu-component)
+- [Step 3: Building a Custom Drawer](#step-3-building-a-custom-drawer)
+- [Step 4: Implementing Mobile and Desktop Views](#step-4-implementing-mobile-and-desktop-views)
+- [Related Posts](#related-posts)
+- [Conclusion](#conclusion)
+
+---
+
+## Introduction
+
+With the increasing complexity of web applications, building a responsive, user-friendly navigation system is essential. In this tutorial, we'll dive into how to create a **responsive navbar** in **Next.js**, leveraging the power of the **Shadcn UI** library to build a custom drawer component for mobile devices.
+
+While Shadcn UI is gaining popularity for its design flexibility, documentation on specific features like drawer components can be sparse. That’s why we’re not just going to build a basic navbar — we’ll explore how to implement a **customizable drawer** that opens from the left, handles mobile navigation effectively, and adapts to different screen sizes.
+
+By the end of this guide, you'll have a scalable and elegant solution for handling navigation across both desktop and mobile views, using cutting-edge tools like **Shadcn UI** and **Next.js**.
+
+### Step 1: Setting Up the Header
+
+The first step in building a navigation bar is setting up a fixed header. This header will contain the `MainMenu` component that we’ll be working on throughout the post.
+
+```jsx
+// components/header.js
+
+import MainMenu from './main-menu'
+
+export default function Header() {
+  return (
+    <header className='fixed inset-x-0 top-0 z-50 bg-background/75 py-6 backdrop-blur-sm'>
+      {/* Rendering the MainMenu */}
+      <MainMenu />
+    </header>
+  )
+}
+```
+
+#### Key Points:
+- **\`fixed inset-x-0 top-0\`**: Ensures the header is positioned at the top and spans the entire width.
+- **\`z-50\`**: Keeps the header above other content.
+- **\`backdrop-blur-sm\`**: Adds a nice blur effect to the background, improving visual appeal.
+  
+##### Why this step is beneficial:
+A fixed header improves user experience by keeping navigation easily accessible as users scroll down the page. The blurred background adds a modern aesthetic, and the \`z-index\` ensures it doesn’t get hidden by other content.
+
+
+
+### Step 2: Creating the Main Menu Component
+
+Next, let’s create the `MainMenu` component that will dynamically switch between desktop and mobile views. The desktop menu will display navigation links and a theme toggle, while the mobile menu will include a hamburger icon that triggers the custom drawer.
+
+```jsx
+// components/main-menu.js
+
+import Link from 'next/link'
+import ThemeToggle from './theme-toggle'
+import { useMediaQuery } from '@/hooks/use-media-query'
+import { Drawer, DrawerContent, DrawerTrigger } from './ui/drawer'
+import { MenuIcon } from 'lucide-react'
+
+export default function MainMenu() {
+  const isDesktop = useMediaQuery('(min-width: 768px)')
+  
+  return isDesktop ? (
+    // Desktop view
+    <div className='Desktop-nav'>
+      <nav className='container flex max-w-5xl items-center justify-between'>
+        {/* Logo */}
+        <div>
+          <Link href='/' className='font-serif text-5xl font-bold'>HS</Link>
+        </div>
+
+        {/* Navigation links */}
+        <ul className='flex items-center gap-6 text-base font-medium text-muted-foreground sm:gap-10'>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/posts'>Posts</Link>
+          </li>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/projects'>Projects</Link>
+          </li>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/contact'>Contact</Link>
+          </li>
+        </ul>
+
+        {/* Theme toggle */}
+        <div>
+          <ThemeToggle />
+        </div>
+      </nav>
+    </div>
+  ) : (
+    // Mobile view
+    <div className='mobile-nav'>
+      <Drawer direction='left'>
+        <nav className='container flex max-w-5xl items-center justify-between'>
+          {/* Menu icon for triggering drawer */}
+          <DrawerTrigger>
+            <MenuIcon />
+          </DrawerTrigger>
+
+          {/* Logo */}
+          <div>
+            <Link href='/' className='font-serif text-2xl font-bold'>HS</Link>
+          </div>
+
+          {/* Theme toggle */}
+          <div>
+            <ThemeToggle />
+          </div>
+        </nav>
+
+        {/* Drawer content for mobile */}
+        <DrawerContent>
+          <ul className='flex flex-col items-start gap-6 px-20 py-8 text-base font-medium text-muted-foreground sm:gap-10'>
+            <li className='transition-colors hover:text-foreground'>
+              <Link href='/posts'>Posts</Link>
+            </li>
+            <li className='transition-colors hover:text-foreground'>
+              <Link href='/projects'>Projects</Link>
+            </li>
+            <li className='transition-colors hover:text-foreground'>
+              <Link href='/contact'>Contact</Link>
+            </li>
+          </ul>
+        </DrawerContent>
+      </Drawer>
+    </div>
+  )
+}
+```
+
+#### Key Points:
+- **Responsive Design**: We use \`useMediaQuery\` to dynamically render different menus based on screen size.
+- **\`DrawerTrigger\` and \`DrawerContent\`**: These are used to create the mobile menu with a drawer that slides in from the left.
+
+##### Why this step is beneficial:
+This structure ensures that the same \`MainMenu\` component can adapt to both desktop and mobile views, reducing code duplication. The drawer implementation allows for smooth and user-friendly navigation on mobile devices.
+
+
+
+### Step 3: Building a Custom Drawer
+
+To handle the mobile menu, we need a custom drawer component. This drawer will slide from the left, housing the navigation links when the hamburger icon is clicked.
+
+```jsx
+// components/ui/drawer.js
+
+import * as React from "react"
+import { Drawer as DrawerPrimitive } from "vaul"
+import { cn } from "@/lib/utils"
+
+// Custom context to manage the drawer's direction (left, right, top, bottom)
+const DrawerContext = React.createContext<{ direction?: "top" | "bottom" | "left" | "right" }>({});
+
+// Custom Drawer component wrapping the original DrawerPrimitive
+// It allows customization, such as setting the drawer's direction and whether to scale the background
+const Drawer = ({ shouldScaleBackground = true, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
+  // Providing direction value to context, allowing us to modify drawer behavior based on its direction
+  <DrawerContext.Provider value={{ direction: props.direction }}>
+    <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
+  </DrawerContext.Provider>
+);
+
+const DrawerTrigger = DrawerPrimitive.Trigger;
+const DrawerPortal = DrawerPrimitive.Portal;
+const DrawerClose = DrawerPrimitive.Close;
+
+// Custom DrawerOverlay to control the overlay style
+const DrawerOverlay = React.forwardRef(
+  ({ className, ...props }, ref) => (
+    <DrawerPrimitive.Overlay 
+      ref={ref} 
+      className={cn("fixed inset-0 z-50 bg-black/80", className)} // Custom styling for the overlay
+      {...props} 
+    />
+  )
+);
+
+// Custom DrawerContent where the key changes for direction handling are made
+const DrawerContent = React.forwardRef(
+  ({ className, children, ...props }, ref) => {
+    // Access the drawer's direction from context (left, right, etc.)
+    const { direction } = React.useContext(DrawerContext);
+    
+    return (
+      <DrawerPortal>
+        {/* Rendering the overlay behind the drawer */}
+        <DrawerOverlay />
+        
+        <DrawerPrimitive.Content
+          ref={ref}
+          className={cn(
+            // The default style for the drawer is at the bottom
+            "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+            
+            // Customization: When the direction is 'left', apply left-side positioning
+            direction === "left" && "top-0 left-0 w-screen max-w-80 h-full", // Drawer slides in from the left
+            
+            className
+          )}
+          {...props}
+        >
+          {/* Optional customization: Add a handle to the drawer */}
+          <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+          {children}
+        </DrawerPrimitive.Content>
+      </DrawerPortal>
+    );
+  }
+);
+
+export { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent };
+```
+
+#### Key Points:
+- **\`DrawerContext\`**: This manages the direction of the drawer (left, right, etc.) through React's context. It allows the direction to be dynamically set, making the drawer component more flexible.
+- **Direction Handling in DrawerContent**: The key customization here is the conditional application of Tailwind classes for positioning the drawer based on the `direction`. For example, if the direction is `left`, we apply the classes to position it on the left side (`top-0 left-0 w-screen max-w-80 h-full`).
+- **Drawer Handle**: We've added a small handle element at the top of the drawer (`h-2 w-[100px] bg-muted`), which acts as a visual cue for interaction.
+
+##### Why this step is beneficial:
+By using context, the drawer's direction can be easily modified, making it a reusable component for different layouts. This approach improves scalability and maintainability while ensuring flexibility for various design scenarios. 
+
+
+### Step 4: Implementing Mobile and Desktop Views
+
+By using the `MainMenu` component, we automatically render the appropriate navigation based on screen size. The drawer provides a clean and user-friendly way to display the mobile menu.
+
+```jsx
+return isDesktop ? (
+  // Desktop view
+  <div className='Desktop-nav'>
+    <nav className='container flex max-w-5xl items-center justify-between'>
+      {/* Logo */}
+      <div>
+        <Link href='/' className='font-serif text-5xl font-bold'>HS</Link>
+      </div>
+
+      {/* Navigation links */}
+      <ul className='flex items-center gap-6 text-base font-medium text-muted-foreground sm:gap-10'>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/posts'>Posts</Link>
+        </li>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/projects'>Projects</Link>
+        </li>
+        <li className='transition-colors hover:text-foreground'>
+          <Link href='/contact'>Contact</Link>
+        </li>
+      </ul>
+
+      {/* Theme toggle */}
+      <div>
+        <ThemeToggle />
+      </div>
+    </nav>
+  </div>
+) : (
+  // Mobile view with drawer
+  <div className='mobile-nav'>
+    <Drawer direction='left'>
+      <nav className='container flex max-w-5xl items-center justify-between'>
+        {/* Menu icon for triggering drawer */}
+        <DrawerTrigger>
+          <MenuIcon />
+        </DrawerTrigger>
+
+        {/* Logo */}
+        <div>
+          <Link href='/' className='font-serif text-2xl font-bold'>HS</Link>
+        </div>
+
+        {/* Theme toggle */}
+        <div>
+          <ThemeToggle />
+        </div>
+      </nav>
+
+      {/* Drawer content for mobile */}
+      <DrawerContent>
+        <ul className='flex flex-col items-start gap-6 px-20 py-8 text-base font-medium text-muted-foreground sm:gap-10'>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/posts'>Posts</Link>
+          </li>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/projects'>Projects</Link>
+          </li>
+          <li className='transition-colors hover:text-foreground'>
+            <Link href='/contact'>Contact</Link>
+          </li>
+        </ul>
+      </DrawerContent>
+    </Drawer>
+  </div>
+)
+```
+
+#### Key Points:
+- **Desktop View**: Displays navigation links in a flexbox layout, with a logo on the left and a theme toggle on the right.
+- **Mobile View**: Uses the drawer for the menu, triggered by the `MenuIcon`, with a logo and theme toggle still accessible.
+## Related Posts
+
+If you found this guide helpful, you might also enjoy:
+
+- [How to Add a Second Logo in Dawn Theme with Smooth Transitions](/posts/logo-transition)
+
+---
+
+## Conclusion
+
+By building this responsive navbar with a custom drawer, your Next.js project will provide a polished and modern navigation experience across both desktop and mobile devices. The use of Tailwind CSS and a custom drawer ensures flexibility, scalability, and ease of maintenance.
+
+Whether you're working on a personal project or building for production, this solution is perfect for improving user experience. Don’t forget to explore related posts to further enhance your web projects.
+
+Let me know how this worked for you, and happy coding!
