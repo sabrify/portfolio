@@ -17,14 +17,14 @@ function Code({
 
 // Define the custom components with proper typing for MDX
 interface MDXComponents {
-  code: React.ComponentType<React.HTMLProps<HTMLElement>>
-  HeadingWithId: React.ComponentType<any>
+  code: React.ComponentType<React.HTMLAttributes<HTMLElement>>
+  HeadingWithId: React.ComponentType<React.HTMLAttributes<HTMLHeadingElement>>
 }
 
 // Custom components for MDX rendering
 const components: MDXComponents = {
   code: Code,
-  HeadingWithId
+  HeadingWithId // Handles all heading elements
 }
 
 export default function MDXContent(
