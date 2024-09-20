@@ -12,7 +12,7 @@ export default function MainMenu() {
       <nav className='container flex max-w-5xl items-center justify-between'>
         <div>
           <Link href='/' className='font-serif text-5xl font-bold'>
-            HS
+            SH
           </Link>
         </div>
 
@@ -44,7 +44,7 @@ export default function MainMenu() {
           </DrawerTrigger>
           <div>
             <Link href='/' className='font-serif text-2xl font-bold'>
-              HS
+              SH
             </Link>
           </div>
           <div>
