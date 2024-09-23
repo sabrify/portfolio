@@ -7,6 +7,7 @@ import './globals.css'
 import Providers from '@/components/providers'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -26,6 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning className='scroll-smooth'>
+      <GoogleAnalytics />
       <body
         className={cn(
           'flex min-h-screen flex-col font-sans antialiased',
