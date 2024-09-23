@@ -22,5 +22,9 @@ const GoogleAnalytics = () => {
     </>
   )
 }
+console.log(
+  'Google Analytics Measurement ID:',
+  process.env.NEXT_PUBLIC_MEASUREMENT_ID
+)
 
 export default GoogleAnalytics
