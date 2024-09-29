@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import authorImage from '@/public/images/authors/hamid.jpg'
+import authorImage from '@/public/images/authors/me.jpg'
 
 export default function Intro() {
   return (
@@ -7,9 +7,10 @@ export default function Intro() {
       <div className='mt-2 flex-1 md:mt-0'>
         <h1 className='title no-underline'>Hey, I&#39;m Hamid.</h1>
         <p className='mt-3 font-light text-muted-foreground'>
-        I&#39;m a web developer based in Kenitra, Morocco. with a focus
-         on eCommerce solutions and Shopify development.  I love exploring new technologies and sharing
-         what I learn through hands-on projects and coding challenges.
+          I&#39;m a web developer based in Kenitra, Morocco. with a focus on
+          eCommerce solutions and Shopify development. I love exploring new
+          technologies and sharing what I learn through hands-on projects and
+          coding challenges.
         </p>
       </div>
       <div className='relative'>
