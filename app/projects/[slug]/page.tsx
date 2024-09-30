@@ -58,7 +58,19 @@ export default async function Project({
           </p>
         </header>
 
-        <main className='prose max-w-5xl mt-16 dark:prose-invert'>
+        <main className='prose mt-16 max-w-5xl dark:prose-invert'>
+          <div
+            className='relative mb-6 w-full overflow-hidden rounded-lg'
+            style={{ height: '100vh' }}
+          >
+            <Image
+              src='/images/projects/savage-paws-second-image.png'
+              alt='Second view of Savage Paws store'
+              className='object-cover'
+              fill
+              style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+            />
+          </div>
           <MDXContent source={content} />
         </main>
       </div>
