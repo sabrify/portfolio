@@ -58,21 +58,31 @@ export default async function Project({
           </p>
         </header>
 
+        
         <main className='prose mt-16 max-w-5xl dark:prose-invert'>
-          <div
-            className='relative mb-6 w-full overflow-hidden rounded-lg'
-            style={{ height: '100vh' }}
-          >
-            <Image
-              src='/images/projects/savage-paws-second-image.png'
-              alt='Second view of Savage Paws store'
-              className='object-cover'
-              fill
-              style={{ objectFit: 'contain', height: '100%', width: '100%' }}
-            />
-          </div>
-          <MDXContent source={content} />
-        </main>
+  <div
+    className='relative mb-6 w-full h-screen overflow-hidden rounded-lg sm:h-[80vh]' // Full height on mobile, 80vh on larger screens
+  >
+    {/* Mobile version */}
+    <Image
+      src='/images/projects/savage_mobile_layout.png'
+      alt='Second view of Savage Paws store - Mobile'
+      className='object-contain sm:hidden' // Only visible on smaller screens
+      fill
+      sizes="100vw" // Full viewport width on mobile
+    />
+    {/* Desktop version */}
+    <Image
+      src='/images/projects/savage-paws-second-image.png'
+      alt='Second view of Savage Paws store'
+      className='hidden sm:block object-contain' // Visible on larger screens
+      fill
+      sizes="(min-width: 640px) 50vw, 100vw"
+    />
+  </div>
+  <MDXContent source={content} />
+</main>
+
       </div>
     </section>
   )
