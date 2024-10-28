@@ -64,7 +64,7 @@ export default async function Project({
             style={{ height: '100vh' }}
           >
             <Image
-              src='/images/projects/savage-paws-second-image.png'
+              src='/images/projects/savage-mobile-layout.png'
               alt='Second view of Savage Paws store'
               className='object-cover'
               fill

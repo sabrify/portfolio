@@ -1,0 +1,78 @@
+---
+title: "Streamline Inventory Management: Automate Low Stock Alerts with Shopify Flow"
+summary: "Learn how to set up automated low stock alerts in Shopify Flow to keep products available and prevent missed sales opportunities."
+image: "/images/posts/shopify-low-stock-alerts.jpg"
+author: "Hamid Sabri"
+publishedAt: "2024-10-28"
+---
+
+Effective inventory management is crucial for eCommerce success, as stockouts on popular items can lead to lost sales and disappointed customers. By using Shopify Flow, you can automate low stock alerts, ensuring products stay available without manual tracking.
+
+---
+
+<HeadingWithId id="table-of-contents" as="h2">Table of Contents</HeadingWithId>
+
+- [Introduction](#introduction)
+- [Benefits of Low Stock Alerts](#benefits-of-low-stock-alerts)
+- [Step-by-Step Guide to Setting Up Low Stock Alerts in Shopify Flow](#step-by-step-guide-to-setting-up-low-stock-alerts-in-shopify-flow)
+  - [Access Shopify Flow](#access-shopify-flow)
+  - [Define the Trigger](#define-the-trigger)
+  - [Set the Condition](#set-the-condition)
+  - [Configure the Notification Action](#configure-the-notification-action)
+  - [Test and Refine the Workflow](#test-and-refine-the-workflow)
+- [Final Thoughts](#final-thoughts)
+
+---
+
+<HeadingWithId id="introduction" as="h2">Introduction</HeadingWithId>
+
+Effective inventory management is crucial for eCommerce success, as stockouts on popular items can lead to lost sales and disappointed customers. By using Shopify Flow, you can automate low stock alerts, ensuring products stay available without manual tracking.
+
+<HeadingWithId id="benefits-of-low-stock-alerts" as="h2">Benefits of Low Stock Alerts</HeadingWithId>
+
+- **Prevent Missed Sales**: Avoid stockouts on popular items, keeping customers satisfied.
+- **Reduce Manual Checks**: Eliminate the need for constant inventory monitoring.
+- **Enhance Customer Satisfaction**: Maintain product availability to foster customer loyalty and encourage repeat purchases.
+
+<HeadingWithId id="step-by-step-guide-to-setting-up-low-stock-alerts-in-shopify-flow" as="h2">Step-by-Step Guide to Setting Up Low Stock Alerts in Shopify Flow</HeadingWithId>
+
+<HeadingWithId id="access-shopify-flow" as="h3">Access Shopify Flow</HeadingWithId>
+
+Log into your Shopify admin dashboard, install the **Flow app**, and **create a new workflow**.
+![Access Shopify Flow GIF](/images/posts/access-shopify-flow.gif)
+
+<HeadingWithId id="define-the-trigger" as="h3">Define the Trigger</HeadingWithId>
+
+Select **Product variant inventory quantity changed** as the trigger.
+![Define the trigger GIF](/images/posts/Define-the-Trigger.gif)
+
+<HeadingWithId id="set-the-condition" as="h3">Set the Condition</HeadingWithId>
+
+- Add the **Inventory quantity** variable in the first condition. Set **InventoryQuantity** to **Less than or equal to** a specific number, such as **20**.
+- Add an **AND** criterion. From the **Trigger variables**, choose **Inventory quantity prior** and set **InventoryQuantityPrior** to **Greater than** 20.
+![Set the condition GIF](/images/posts/Set-the-Condition.gif)
+
+<HeadingWithId id="configure-the-notification-action" as="h3">Configure the Notification Action</HeadingWithId>
+
+- Choose **Send internal email**.
+- Enter the email addresses of team members responsible for inventory management.
+- Set the subject to ```{{productVariant.displayName}} is low in stock ``` to automatically insert the low-stock product variant's title.
+- Craft the email body as follows:
+
+```liquid
+{{productVariant.displayName}} is running low on inventory! We have {{product.totalInventory}} left in stock.
+
+Consider merchandising the product on our online store, or initiate a reorder of the product.
+
+View product: https://{{shop.myshopifyDomain}}/admin/products/{{product.legacyResourceId}}
+```
+
+![configure the notification action GIF](/images/posts/configure-the-notification-action.gif)
+
+<HeadingWithId id="test-and-refine-the-workflow" as="h3">Test and Refine the Workflow</HeadingWithId>
+
+Verify the workflow by adjusting sample stock levels to ensure alerts are triggered when products reach the defined threshold.
+
+<HeadingWithId id="final-thoughts" as="h2">Final Thoughts</HeadingWithId>
+
+Automated low stock alerts in Shopify Flow save time and prevent missed sales opportunities. Experiment with custom thresholds and integrations to streamline your inventory management and keep bestsellers available for your customers.
