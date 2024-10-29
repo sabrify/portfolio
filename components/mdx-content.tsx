@@ -3,6 +3,7 @@ import { highlight } from 'sugar-high'
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc'
 import HeadingWithId from './headingwithid'
 import React, { ReactNode } from 'react'
+import YouTubeEmbed from './youtube-embed'
 
 // Define the Code component for syntax highlighting
 function Code({
@@ -19,12 +20,14 @@ function Code({
 interface MDXComponents {
   code: React.ComponentType<React.HTMLAttributes<HTMLElement>>
   HeadingWithId: React.ComponentType<React.HTMLAttributes<HTMLHeadingElement>>
+  YouTubeEmbed: React.ComponentType<{ videoId: string; start?: number; end?: number }>; 
 }
 
 // Custom components for MDX rendering
 const components: MDXComponents = {
   code: Code,
-  HeadingWithId // Handles all heading elements
+  HeadingWithId, // Handles all heading elements
+  YouTubeEmbed,
 }
 
 export default function MDXContent(

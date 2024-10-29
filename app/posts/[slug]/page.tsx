@@ -45,7 +45,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
               src={image}
               alt={title || ''}
               className='object-contain'
-              layout='fill'
+              fill
             />
           </div>
         )}

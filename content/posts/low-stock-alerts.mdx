@@ -1,7 +1,7 @@
 ---
 title: "Streamline Inventory Management: Automate Low Stock Alerts with Shopify Flow"
 summary: "Learn how to set up automated low stock alerts in Shopify Flow to keep products available and prevent missed sales opportunities."
-image: "/images/posts/shopify-low-stock-alerts.jpg"
+image: "/images/posts/shopify-low-stock-alertss.png"
 author: "Hamid Sabri"
 publishedAt: "2024-10-28"
 ---
@@ -39,18 +39,19 @@ Effective inventory management is crucial for eCommerce success, as stockouts on
 <HeadingWithId id="access-shopify-flow" as="h3">Access Shopify Flow</HeadingWithId>
 
 Log into your Shopify admin dashboard, install the **Flow app**, and **create a new workflow**.
-![Access Shopify Flow GIF](/images/posts/access-shopify-flow.gif)
+<YouTubeEmbed videoId="0D5V69TJJ4E" start={0} end={6} />
 
 <HeadingWithId id="define-the-trigger" as="h3">Define the Trigger</HeadingWithId>
 
 Select **Product variant inventory quantity changed** as the trigger.
-![Define the trigger GIF](/images/posts/Define-the-Trigger.gif)
+<YouTubeEmbed videoId="0D5V69TJJ4E" start={6} end={10} />
 
 <HeadingWithId id="set-the-condition" as="h3">Set the Condition</HeadingWithId>
 
 - Add the **Inventory quantity** variable in the first condition. Set **InventoryQuantity** to **Less than or equal to** a specific number, such as **20**.
 - Add an **AND** criterion. From the **Trigger variables**, choose **Inventory quantity prior** and set **InventoryQuantityPrior** to **Greater than** 20.
-![Set the condition GIF](/images/posts/Set-the-Condition.gif)
+
+<YouTubeEmbed videoId="0D5V69TJJ4E" start={10} end={43} />
 
 <HeadingWithId id="configure-the-notification-action" as="h3">Configure the Notification Action</HeadingWithId>
 
@@ -67,7 +68,7 @@ Consider merchandising the product on our online store, or initiate a reorder of
 View product: https://{{shop.myshopifyDomain}}/admin/products/{{product.legacyResourceId}}
 ```
 
-![configure the notification action GIF](/images/posts/configure-the-notification-action.gif)
+<YouTubeEmbed videoId="0D5V69TJJ4E" start={43} />
 
 <HeadingWithId id="test-and-refine-the-workflow" as="h3">Test and Refine the Workflow</HeadingWithId>
 
