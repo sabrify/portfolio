@@ -13,7 +13,7 @@ interface YouTubeEmbedProps {
     return (
       <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
         <iframe
-          src={`https://www.youtube.com/embed/${videoId}?${startParam}${endParam}`}
+          src={`https://www.youtube.com/embed/${videoId}?rel=0${startParam}${endParam}`}
           title="YouTube video player"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
