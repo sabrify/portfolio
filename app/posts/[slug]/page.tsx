@@ -23,7 +23,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
   }
 
   const { metadata, content } = post
-  const { title, image, author, publishedAt } = metadata
+  const { title, image, mobileImage, author, publishedAt } = metadata
 
   return (
     <section className='pb-24 pt-32'>
@@ -36,17 +36,28 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <span>Back to posts</span>
         </Link>
 
-        {image && (
+        {image && mobileImage && (
           <div
             className='relative mb-6 w-full overflow-hidden rounded-lg'
             style={{ minHeight: '384px' }}
           >
+            <div className='desktop-image'>
             <Image
               src={image}
+              alt={title || ''}
+              className='object-conain'
+             fill
+            />
+            </div>
+            <div className='mobile-image'>
+            <Image
+              src={mobileImage}
               alt={title || ''}
               className='object-contain'
              fill
             />
+            </div>
+           
           </div>
         )}
 
